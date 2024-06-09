@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.jsdelivr.net/npm/validator@latest/validator.min.js"></script>
 <title>Registrazione</title>
 </head>
 <body>
