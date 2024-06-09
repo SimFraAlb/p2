@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -151,9 +153,12 @@ public class ProdottoDao implements ProdottoDaoInterfaccia{
 
 		ArrayList<ProdottoBean> products = new ArrayList<ProdottoBean>();
 
-		String selectSQL = "SELECT * FROM " + ProdottoDao.TABLE_NAME;
+		String baseSQL = "SELECT * FROM " + ProdottoDao.TABLE_NAME;
+		String selectSQL = baseSQL;
 
-		if (order != null && !order.equals("")) {
+		// Whitelist di colonne per l'ordinamento
+		List<String> validOrders = Arrays.asList("ID_PRODOTTO", "NOME", "PREZZO", "QUANTITA", "DATA_USCITA");
+		if (order != null && validOrders.contains(order.toUpperCase())) {
 			selectSQL += " ORDER BY " + order;
 		}
 
@@ -193,6 +198,7 @@ public class ProdottoDao implements ProdottoDaoInterfaccia{
 		}
 		return products;
 	}
+
 	
 	@Override
 	public synchronized void doUpdateQnt(int id, int qnt) throws SQLException {
